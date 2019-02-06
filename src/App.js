@@ -8,7 +8,9 @@ class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
-    count: 0 
+    count: 0,
+    top: 0,
+    clicked: []
   };
 
   shuffle = a => {
@@ -21,19 +23,69 @@ class App extends Component {
 
   removeFriend = id => {
     // Filter this.state.friends for friends with an id not equal to the id being removed
-    let friends = this.state.friends.filter(friend => friend.id !== id);
+    // let friends = this.state.friends.filter(friend => friend.id !== id);
+
+   
+      
+      // if (friends.id = id) {
+      //   this.state.friends[1].pressed = true; 
+      //   console.log(this.state.friends[1].pressed)
+      // }
+
+      // console.log(this.state.friends[1].pressed)
+
+      // this.state.friends.forEach(friend => {
+      //   if (friend.id = id) {
+      //    console.log("hey")
+      //   }
+
+      // }
+        
+        
+      // console.log(id)  
+
+      // friends[[id]].pressed = true; 
+
+      // console.log(friends[[id]].pressed) 
+
+      // console.log(friends)
+
+      //   )
+
+
+    if (this.state.clicked.indexOf(id) === -1) {
+      this.setState({clicked: this.state.clicked.concat(id)})
+    this.setCounter();
+    this.shuffle(friends)
+    } else {
+    this.reset()
+    }
+
+   
 
 
   //   for (i = 0; i < friends.length; i++) { 
   //     turtles = friends[Math.floor(Math.random() * userGuess.length)];
   // }
     // Set this.state.friends equal to the new friends array
-    this.shuffle(friends)
-    this.setState({ friends });
   };
+
+  reset = () => {
+    this.setState({
+    friends,
+    count: 0,
+    clicked: []
+    }); 
+
+    this.shuffle(friends)
+  }
+
 
 
   setCounter = () => {
+    if (this.state.count >= this.state.top) {
+      this.setState({ top: this.state.count});
+    }
     this.setState({ count: this.state.count + 1 });
   }
 
@@ -43,8 +95,12 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Friends List</Title>
+        <Title>Game of Thrones</Title>
+        <div>
         <p>Total Points = {this.state.count} </p>
+        </div>
+        <p>TOP SCORE = {this.state.top} </p>
+        <div className = "row">
         {this.state.friends.map(friend => (
           <FriendCard
             removeFriend={this.removeFriend}
@@ -57,6 +113,7 @@ class App extends Component {
             setCounter = {this.setCounter}
           />
         ))}
+        </div>
       </Wrapper>
     );
   }
