@@ -3,13 +3,14 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
+import Sub from "./components/Sub";
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
-    count: 0,
     top: 0,
+    count: 0,
     clicked: []
   };
 
@@ -83,7 +84,8 @@ class App extends Component {
 
 
   setCounter = () => {
-    if (this.state.count >= this.state.top) {
+    if (this.state.count > this.state.top) {
+      this.setState({ count: this.state.count + 1 });
       this.setState({ top: this.state.count});
     }
     this.setState({ count: this.state.count + 1 });
@@ -95,11 +97,18 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
+        <div className ="container">
         <Title>Game of Thrones</Title>
+        <Sub>Click on every character without repeating!</Sub>
+        <Sub>Total Points = {this.state.count} </Sub>
+        <Sub>TOP SCORE = {this.state.top}</Sub>
+        
+        {/* <Sub></Sub> */}
         <div>
-        <p>Total Points = {this.state.count} </p>
+        {/* <p>Total Points = {this.state.count} </p> */}
         </div>
-        <p>TOP SCORE = {this.state.top} </p>
+        {/* <p>TOP SCORE = {this.state.top} </p> */}
+        <div className = "container">
         <div className = "row">
         {this.state.friends.map(friend => (
           <FriendCard
@@ -113,6 +122,8 @@ class App extends Component {
             setCounter = {this.setCounter}
           />
         ))}
+        </div>
+        </div>
         </div>
       </Wrapper>
     );

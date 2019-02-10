@@ -4,22 +4,19 @@ import "./style.css";
 function FriendCard(props) {
   return (
     
-    <div className  = "sm col-3">
+  
     <div className="card">
       <div className="img-container">
-        <img className ="ourImage" alt={props.name} src={props.image} />
-      </div>
-     
-      <span onClick={
+        <img className ="ourImage"  onClick={
         () => { props.setCounter(props.id) 
         
         props.removeFriend(props.id) }
         
-        } className="remove">
-        𝘅
-      </span>
+        } className="remove"className="img-fluid" alt="Responsive image" alt={props.name} src={props.image} />
+      </div>
+     
     </div>
-    </div>
+    
    
     
   );

@@ -35,12 +35,12 @@
 .card > .remove {
   color: #ff1744;
   font-size: 48px;
-  position: absolute;
+  /* position: absolute; */
   top: -20px;
   right: 5px;
   cursor: pointer;
 }
 
-.card > .remove:hover {
-  color: #d50000;
+.card :hover {
+  box-shadow: 0 30px 30px #999, 0 3px 6px #999;
 }
